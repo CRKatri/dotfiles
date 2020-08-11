@@ -1,0 +1,12 @@
+#!/bin/bash
+
+function toggle_win_to_state {
+    # get all windows on current desktop
+    windows=$(bspc query --nodes --desktop)
+    # make the windows flaoting
+    for w in $windows; do
+        bspc node $w -t $1 
+    done
+}
+
+toggle_win_to_state $1

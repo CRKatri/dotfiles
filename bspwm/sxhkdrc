@@ -1,0 +1,322 @@
+#################################################################
+# KEYBOARD BINDINGS
+#################################################################
+
+#################################################################
+# SUPER + FUNCTION KEYS
+#################################################################
+
+#Rofi
+super + F12
+    rofi-theme-selector
+
+#################################################################
+# SUPER + ... KEYS
+#################################################################
+
+#Rofit
+super + space
+    rofi -show drun -show-icons -run-shell-command '{terminal} -e \\" {cmd}; read -n 1 -s\\"'
+
+
+#Browser
+super + w
+    firefox-nightly 
+
+#codium start
+super + c
+    vscodium
+
+#Spotify
+super + s
+    kitty -e spt
+
+# start discord
+super + d
+    discord
+
+#Terminal
+super + Return
+    kitty
+
+super + g
+    kitty -e gotop
+
+super + m
+    multimc
+
+#################################################################
+# SUPER + SHIFT KEYS
+#################################################################
+
+# Make a window sticky
+super + shift + t
+    bspc node focused --flag sticky
+
+# Quit xorg server
+super + shift + x
+    bspc quit
+
+#File-Manager
+super + shift + Return
+    kitty -e ranger
+
+#Keyboard dependent
+#File-Manager
+#super + shift + KP_Enter
+#	thunar
+
+#reload sxhkd:
+super + shift + s
+	pkill -USR1 -x sxhkd
+
+#Keyboard dependent
+#super + shift + KP_Enter
+#	thunar
+
+#################################################################
+# CONTROL + ALT KEYS
+#################################################################
+
+
+#################################################################
+# ALT + ... KEYS
+#################################################################
+
+
+#################################################################
+#VARIETY KEYS WITH PYWAL
+#################################################################
+
+
+#################################################################
+# CONTROL + SHIFT KEYS
+#################################################################
+
+
+#################################################################
+#     SCREENSHOTS
+#################################################################
+
+#Scrot
+super + F1
+    scrot
+
+#################################################################
+#     FUNCTION KEYS
+#################################################################
+
+
+#################################################################
+#     MULTIMEDIA KEYS
+#################################################################
+
+#Raises volume
+XF86AudioRaiseVolume
+    pamixer -i 1
+
+#Lowers volume
+XF86AudioLowerVolume
+    pamixer -d 1
+
+#Mute
+XF86AudioMute
+    pamixer -t
+
+#Playerctl works for Pragha, Spotify and others
+#Delete the line for playerctl if you want to use mpc
+#and replace it with the corresponding code
+#mpc works for e.g.ncmpcpp
+#mpc toggle
+#mpc next
+#mpc prev
+#mpc stop
+
+#PLAY
+XF86AudioPlay
+    playerctl play-pause
+
+#Next
+XF86AudioNext
+    playerctl next
+
+#previous
+XF86AudioPrev
+    playerctl previous
+
+#Stop
+XF86AudioStop
+    playerctl stop
+
+XF86MonBrightnessUp
+    light -A 5 
+
+XF86MonBrightnessDown
+    light -U 5
+
+#########################
+#        POLYBAR        #
+#########################
+
+
+#################################################################
+#################################################################
+##################   DESKTOP SPECIFIC    ########################
+#################################################################
+#################################################################
+
+#################################################################
+# CTRL + ALT KEYS
+#################################################################
+
+#################################################################
+# SUPER + KEYS
+#################################################################
+
+#Toggle fullscreen of window
+#super + f
+super + f
+	bspc node --state \~fullscreen
+
+
+# Toggle pseudo tiling of window
+super + p
+	bspc node --state \~pseudo_tiled
+
+#kill
+super + q
+	bspc node -c
+
+#################################################################
+# SUPER KEYS
+#################################################################
+
+#Focus selected desktop
+#super + Tab
+#    rofi -show window
+
+# Increase/decrease window gap on focused desktop
+super + bracket{left,right}
+	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 5 ))
+
+# set the window state
+super + alt + space
+	bspc node -t {floating,tiled}
+
+# Move focus to other monitor
+super + BackSpace
+		bspc monitor -f next
+
+#################################################################
+# SUPER + ALT KEYS
+#################################################################
+
+# Expand tiled space
+super + alt + {h,j,k,l}
+	bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
+
+
+#################################################################
+# SUPER + CONTROL KEYS
+#################################################################
+
+#################################################################
+# SUPER + SHIFT KEYS
+#################################################################
+
+# toggle all to floating or tiled
+super + shift + space
+    ~/.config/bspwm/scripts/toggle_all {floating,tiled}
+
+#Reload bspwm
+super + shift + r
+	~/.config/bspwm/bspwmrc
+
+#Logout
+super + shift + x
+	bspc quit
+
+# Focus/swap windows by direction
+super + {h,j,k,l}
+	bspc node --focus {west,south,north,east}
+
+super + shift + {h,j,k,l}
+    bspc node --swap {west,south,north,east}
+
+# Flip layout vertically/horizontally
+super + {_,shift + }a
+	bspc node @/ --flip {vertical,horizontal}
+
+# Move focused window to other monitor
+super + shift + Left
+	bspc node -m next --follow
+
+# Move focused window to other monitor
+super + shift + Right
+		bspc node -m next --follow
+
+# Move focused window to other monitor
+super + shift + Up
+	bspc node -m next --follow
+
+# Move focused window to other monitor
+super + shift + Down
+	bspc node -m next --follow
+
+#################################################################
+# SUPER + CONTROL KEYS
+#################################################################
+
+# Contract tiled space
+super + ctrl + {h,j,k,l}
+	bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
+
+# Screenshot
+super + ctrl + 4
+	maim | xclip -selection clipboard -t image/png
+
+super + ctrl + shift + 4
+	maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+
+#################################################################
+# ALT KEYS
+#################################################################
+
+
+#################################################################
+# ALT + SHIFT KEYS
+#################################################################
+
+
+#################################################################
+# CTRL + ALT KEYS
+#################################################################
+
+
+#################################################################
+#################################################################
+##################   AZERTY/QWERTY/ ... KEYBOARD#################
+#################################################################
+#################################################################
+
+#Switch here between qwerty and azerty or make new one
+#Focus selected desktop FOR QWERTY KEYBOARDS
+super + {1-9,0}
+	bspc desktop -f '^{1-9,10}'
+
+#Focus selected desktop	FOR AZERTY KEYBOARDS
+#super + {ampersand,eacute,quotedbl,apostrophe,parenleft,section,egrave,exclam,ccedilla,agrave}
+#    bspc desktop -f '^{1-9,10}'
+
+#################################################################
+
+#Switch here between qwerty and azerty or make new one
+#Move window to selected desktop FOR QWERTY KEYBOARDS
+super + shift + {1-9,0}
+    id=$(bspc query -N -n); bspc node -d ^{1-9,10}; bspc node -f ${id}}
+
+#Move window to selected desktop FOR AZERTY KEYBOARDS
+#super + shift + {ampersand,eacute,quotedbl,apostrophe,parenleft,section,egrave,exclam,ccedilla,agrave}
+#    id=$(bspc query -N -n); bspc node -d ^{1-9,10}; bspc node -f ${id}}
+
+#################################################################

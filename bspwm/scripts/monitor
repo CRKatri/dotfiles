@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# connects the bluetooth
+# keyboard if found
+function check_keyboard() {
+    # check if keyboard is connected
+    stat=$(bluetoothctl info DC:2C:26:D9:C6:D4 2> /dev/null | awk '/Connected:/ { print $2 }')
+    # if not connected try to connect
+    if [ "$stat" == "no" ]; then
+        # power bluetooth on
+        bluetoothctl power on > /dev/null
+        # try to connect to bluetooth keyboard
+        conn=$(bluetoothctl connect DC:2C:26:D9:C6:D4 2> /dev/null | awk '/^Failed/ { print $1 }')
+        # if not empty, the process
+        # failed => print out error
+        if [ -n "$conn" ]; then
+            setxkbmap us -model pc98 -variant alt-intl
+            echo "Failed to connnect to bluetooth keyboard!"
+        # else change 
+        # the keyboard layout
+        else
+            setxkbmap us -model pc98 -variant alt-intl
+            echo "Bluetooth keyboard is connected!"
+        fi
+    fi
+}
+
+function find_mon {
+    # checks if mon is connected
+    conn=$(xrandr | awk '/^DP1/ { print $2 }')
+    if [ "$conn" == "connected" ]; then
+        # set monitor as primary display
+        xrandr --output DP1 --left-of eDP1 --mode 1920x1080 --primary
+        # set the wallpapers
+        nitrogen $1 --set-scaled --head=1
+        nitrogen $1 --set-scaled --head=0
+    else
+        nitrogen $1 --set-scaled
+    fi
+}
