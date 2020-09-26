@@ -23,17 +23,20 @@ super + space
 super + w
     firefox-nightly 
 
-#codium start
+#calc start
 super + c
-    vscodium
+    kitty -e calc
+
+super + t
+    thunderbird
 
 #Spotify
 super + s
     kitty -e spt
 
-# start discord
+# start weechat
 super + d
-    discord
+    kitty -e weechat
 
 #Terminal
 super + Return
@@ -44,6 +47,9 @@ super + g
 
 super + m
     multimc
+
+super + ctrl + s
+    steam
 
 #################################################################
 # SUPER + SHIFT KEYS
@@ -98,9 +104,12 @@ super + shift + s
 #     SCREENSHOTS
 #################################################################
 
-#Scrot
-super + F1
-    scrot
+# Screenshot
+super + ctrl + 4
+	maim | xclip -selection clipboard -t image/png
+
+super + ctrl + shift + 4
+	maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png && maim -i $(xdotool getactivewindow) ~/$(date +%s).png
 
 #################################################################
 #     FUNCTION KEYS
@@ -271,13 +280,6 @@ super + shift + Down
 super + ctrl + {h,j,k,l}
 	bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
 
-# Screenshot
-super + ctrl + 4
-	maim | xclip -selection clipboard -t image/png
-
-super + ctrl + shift + 4
-	maim -i $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
-
 #################################################################
 # ALT KEYS
 #################################################################
@@ -320,3 +322,9 @@ super + shift + {1-9,0}
 #    id=$(bspc query -N -n); bspc node -d ^{1-9,10}; bspc node -f ${id}}
 
 #################################################################
+
+super + grave
+  dunstctl history-pop
+
+super + shift + grave
+  dunstctl close

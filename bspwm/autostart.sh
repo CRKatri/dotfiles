@@ -4,11 +4,7 @@
 #source ~/.config/bspwm/scripts/monitor
 
 function run {
-    procs=$(pgrep $1)
-    if procs; then
-        # kill the processes
-        echo $procs | while read p; do kill $p; done
-    fi
+    pkill $1
     $@ &
 }
 
@@ -25,17 +21,21 @@ function run {
 #feh --randomize --bg-fill ~/Dropbox/Apps/Desktoppr/*
 
 # Find monitors and set wallpapers
-run nitrogen ~/Pictures/wallpaper.jpg --set-scaled
+run nitrogen ~/Pictures/at-at-minimalist-pc-wallpaper-4k.png --set-scaled
 # run find_mon ".local/share/wallpapers/mojave_dark.jpg"
 
 run xsetroot -cursor_name left_ptr
 run sxhkd -c $HOME/.config/bspwm/sxhkdrc
 
-run picom --config $HOME/.config/bspwm/picom.conf
-
-run dunst
-
-#pulseaudio --start
+run picom --experimental-backends --config $HOME/.config/bspwm/picom.conf
 
 #run polybar
 $HOME/.config/polybar/launch.sh
+
+setxkbmap -option compose:rctrl
+
+pulseaudio --start
+
+run dunst
+
+run spotifyd --no-daemon

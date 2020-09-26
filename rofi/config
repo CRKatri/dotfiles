@@ -1,2 +1,1 @@
-rofi.theme: nord
-rofi.font: SF Pro Display 12
+rofi.theme: ~/.config/rofi/gruvbox.rasi
