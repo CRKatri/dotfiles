@@ -1,0 +1,4 @@
+{
+	"sourcekit.commandPath": "/home/cameron/Documents/swift5.3-release/usr/bin/sourcekit-lsp",
+	"clangd.path": "/usr/bin/clangd"
+}
